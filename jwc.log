@@ -13,6 +13,8 @@
     for e_info,e_content in contents:
   File "spider.py", line 78, in __newArticle
     if not e_info['url'] in record:
-  File "src/lxml/etree.pyx", line 1165, in lxml.etree._Element.__getitem__
+  File "src/lxml/etree.pyx", line 1165, in lxml.etre
+  e._Element.__getitem__
 TypeError: 'str' object cannot be interpreted as an integer
 
+12-07-Friday 19:46:33 - spider.py[line:119] - INFO: update success!

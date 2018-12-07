@@ -56,7 +56,7 @@ class Spider:
                 'url': e.xpath('./a/@href')[0],
                 'date': e.xpath('./a/em/text()')[0]
             }
-            es.append(e)
+            es.append(article)
         return es
 
 
@@ -116,9 +116,7 @@ if __name__ == "__main__":
     try:
         while True:
             spider.publish()
+            spider.logger.info("update success!")
             time.sleep(1800)
     except Exception as e:
         spider.logger.warning(traceback.format_exc())
-
-
-
