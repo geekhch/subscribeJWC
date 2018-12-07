@@ -101,7 +101,7 @@ class Spider:
             smtpObj.login(MAIL_USER,MAIL_PASS)  
             smtpObj.sendmail(sender, receivers, message.as_string())
             self.logger.info("邮件发送成功")
-        except smtplib.SMTPException as e:
+        except Exception as e:
             self.logger.warning(str(e))
 
 
