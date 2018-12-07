@@ -87,7 +87,6 @@ class Spider:
 
     def __mail(self, subject, message):
         """发送邮件"""
-        print('begin')
         sender = MAIL_USER
         receivers = self.collection.find_one({'_id':'information'},{'receivers':1,'_id':0})['receivers']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
         message = MIMEText(message, "HTML", 'utf-8')
