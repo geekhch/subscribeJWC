@@ -91,7 +91,7 @@ class Spider:
         receivers = self.collection.find_one({'_id':'information'},{'receivers':1,'_id':0})['receivers']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
         message = MIMEText(message, "HTML", 'utf-8')
         message['Subject'] = Header(subject, 'utf-8')
-        message['From'] =  "教务处通知"+"<15682177109@163.com>"
+        message['From'] =  "教务处通知"+"<SCU Tracker>"
         message['To'] = ";".join(receivers)
         try:
             smtpObj = smtplib.SMTP() 
