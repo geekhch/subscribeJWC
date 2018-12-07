@@ -74,7 +74,6 @@ class Spider:
         record = self.collection.find_one({'_id':'information'},{'record':1,'_id':0})['record']
         
         generator = self.__parse_title()
-        data = []
         for e_info in generator:
             if not e_info['url'] in record:
                 record.append(e_info['url'])
@@ -82,10 +81,9 @@ class Spider:
                 if len(record) > 30:
                     record.pop(0)
                 content = self.__newArticleHelper(e_info['url'])
-                data.append([e_info, content])
+                yield [e_info, content]
         # 更新记录
         self.collection.update_one({'_id':'information'},{'$set':{'record':record}})
-        return data
 
     def __mail(self, subject, message):
         """发送邮件"""
@@ -96,18 +94,14 @@ class Spider:
         message['Subject'] = Header(subject, 'utf-8')
         message['From'] =  "教务处通知"+"<MAIL_USER>"
         message['To'] = ";".join(receivers)
-        print('try')
-        # try:
-        smtpObj = smtplib.SMTP() 
-        smtpObj.connect(HOST, 25)    # 25 为 SMTP 端口号
-        print('login')
-        smtpObj.login(MAIL_USER,MAIL_PASS)  
-        print('send')
-        smtpObj.sendmail(sender, receivers, message.as_string())
-        self.logger.info("邮件发送成功")
-        print('ok')
-        # except Exception as e:
-        #     self.logger.warning(traceback.format_exc())
+        try:
+            smtpObj = smtplib.SMTP() 
+            smtpObj.connect(HOST, 25)    # 25 为 SMTP 端口号
+            smtpObj.login(MAIL_USER,MAIL_PASS)  
+            smtpObj.sendmail(sender, receivers, message.as_string())
+            self.logger.info("邮件发送成功")
+        except Exception as e:
+            self.logger.warning(traceback.format_exc())
 
 
     def publish(self):
