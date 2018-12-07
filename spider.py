@@ -74,6 +74,7 @@ class Spider:
         record = self.collection.find_one({'_id':'information'},{'record':1,'_id':0})['record']
         
         generator = self.__parse_title()
+        data = []
         for e_info in generator:
             if not e_info['url'] in record:
                 record.append(e_info['url'])
@@ -81,10 +82,10 @@ class Spider:
                 if len(record) > 30:
                     record.pop(0)
                 content = self.__newArticleHelper(e_info['url'])
-                yield e_info, content
+                data.append(e_info, content)
         # 更新记录
         self.collection.update_one({'_id':'information'},{'$set':{'record':record}})
-
+        return data
 
     def __mail(self, subject, message):
         """发送邮件"""
