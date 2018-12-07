@@ -89,18 +89,23 @@ class Spider:
 
     def __mail(self, subject, message):
         """发送邮件"""
+        print('begin')
         sender = MAIL_USER
         receivers = self.collection.find_one({'_id':'information'},{'receivers':1,'_id':0})['receivers']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
         message = MIMEText(message, "HTML", 'utf-8')
         message['Subject'] = Header(subject, 'utf-8')
         message['From'] =  "教务处通知"+"<MAIL_USER>"
         message['To'] = ";".join(receivers)
+        print('try')
         try:
             smtpObj = smtplib.SMTP() 
             smtpObj.connect(HOST, 25)    # 25 为 SMTP 端口号
+            print('login')
             smtpObj.login(MAIL_USER,MAIL_PASS)  
+            print('send')
             smtpObj.sendmail(sender, receivers, message.as_string())
             self.logger.info("邮件发送成功")
+            print('ok')
         except Exception as e:
             self.logger.warning(traceback.format_exc())
 
