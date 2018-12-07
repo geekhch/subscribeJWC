@@ -81,7 +81,7 @@ class Spider:
                 if len(record) > 30:
                     record.pop(0)
                 content = self.__newArticleHelper(e_info['url'])
-                yield [e_info, content]
+                yield e_info, content
         # 更新记录
         self.collection.update_one({'_id':'information'},{'$set':{'record':record}})
 
