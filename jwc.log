@@ -1,20 +1,17 @@
-12-07-Friday 12:15:43 - spider.py[line:102] - INFO: 邮件发送成功
-12-07-Friday 12:18:44 - spider.py[line:102] - INFO: 邮件发送成功
-12-07-Friday 12:18:46 - spider.py[line:102] - INFO: 邮件发送成功
-12-07-Friday 12:21:44 - spider.py[line:102] - INFO: 邮件发送成功
-12-07-Friday 12:21:45 - spider.py[line:102] - INFO: 邮件发送成功
-12-07-Friday 12:21:50 - spider.py[line:102] - INFO: 邮件发送成功
-12-07-Friday 12:21:54 - spider.py[line:102] - INFO: 邮件发送成功
-12-07-Friday 12:21:55 - spider.py[line:102] - INFO: 邮件发送成功
-12-07-Friday 13:18:46 - spider.py[line:121] - WARNING: Traceback (most recent call last):
+12-07-Friday 20:28:51 - spider.py[line:122] - WARNING: Traceback (most recent call last):
   File "spider.py", line 118, in <module>
     spider.publish()
-  File "spider.py", line 109, in publish
-    for e_info,e_content in contents:
-  File "spider.py", line 78, in __newArticle
-    if not e_info['url'] in record:
-  File "src/lxml/etree.pyx", line 1165, in lxml.etre
-  e._Element.__getitem__
-TypeError: 'str' object cannot be interpreted as an integer
+  File "spider.py", line 111, in publish
+    self.__mail(e_info['title'],e_content)
+  File "spider.py", line 99, in __mail
+    smtpObj.connect(HOST, 25)    # 25 为 SMTP 端口号
+  File "/usr/lib64/python3.6/smtplib.py", line 336, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/lib64/python3.6/smtplib.py", line 307, in _get_socket
+    self.source_address)
+  File "/usr/lib64/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/lib64/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 110] Connection timed out
 
-12-07-Friday 19:46:33 - spider.py[line:119] - INFO: update success!
