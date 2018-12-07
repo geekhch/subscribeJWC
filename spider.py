@@ -49,13 +49,15 @@ class Spider:
         html = GET(JWC)
         selector = etree.HTML(html)
         data = selector.xpath('//ul[@class="list-llb-s"]/li')
+        es = []
         for e in data:
             article = {
                 'title': e.xpath('./@title')[0],
                 'url': e.xpath('./a/@href')[0],
                 'date': e.xpath('./a/em/text()')[0]
             }
-            yield article
+            es.append(e)
+        return es
 
 
     def __newArticleHelper(self, url):
@@ -88,8 +90,6 @@ class Spider:
         """发送邮件"""
         sender = MAIL_USER
         receivers = self.collection.find_one({'_id':'information'},{'receivers':1,'_id':0})['receivers']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
-        if not receivers:
-            receivers
         message = MIMEText(message, "HTML", 'utf-8')
         message['Subject'] = Header(subject, 'utf-8')
         message['From'] =  "教务处通知"+"<MAIL_USER>"

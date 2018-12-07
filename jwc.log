@@ -6,3 +6,13 @@
 12-07-Friday 12:21:50 - spider.py[line:102] - INFO: 邮件发送成功
 12-07-Friday 12:21:54 - spider.py[line:102] - INFO: 邮件发送成功
 12-07-Friday 12:21:55 - spider.py[line:102] - INFO: 邮件发送成功
+12-07-Friday 13:18:46 - spider.py[line:121] - WARNING: Traceback (most recent call last):
+  File "spider.py", line 118, in <module>
+    spider.publish()
+  File "spider.py", line 109, in publish
+    for e_info,e_content in contents:
+  File "spider.py", line 78, in __newArticle
+    if not e_info['url'] in record:
+  File "src/lxml/etree.pyx", line 1165, in lxml.etree._Element.__getitem__
+TypeError: 'str' object cannot be interpreted as an integer
+
