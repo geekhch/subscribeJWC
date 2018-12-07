@@ -92,7 +92,9 @@ class Spider:
         message = MIMEText(message, "HTML", 'utf-8')
         message['Subject'] = Header(subject, 'utf-8')
         message['From'] =  "教务处通知"+"<SCU Tracker>"
-        message['To'] = ";".join(receivers)
+        message['To'] = ";".join(receivers[:1])
+        message['Cc'] = ";".join(receivers[1:])
+        # 657252845@qq.com
         try:
             smtpObj = smtplib.SMTP() 
             smtpObj.connect(HOST, 25)    # 25 为 SMTP 端口号
