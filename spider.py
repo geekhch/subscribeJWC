@@ -97,17 +97,17 @@ class Spider:
         message['From'] =  "教务处通知"+"<MAIL_USER>"
         message['To'] = ";".join(receivers)
         print('try')
-        try:
-            smtpObj = smtplib.SMTP() 
-            smtpObj.connect(HOST, 25)    # 25 为 SMTP 端口号
-            print('login')
-            smtpObj.login(MAIL_USER,MAIL_PASS)  
-            print('send')
-            smtpObj.sendmail(sender, receivers, message.as_string())
-            self.logger.info("邮件发送成功")
-            print('ok')
-        except Exception as e:
-            self.logger.warning(traceback.format_exc())
+        # try:
+        smtpObj = smtplib.SMTP() 
+        smtpObj.connect(HOST, 25)    # 25 为 SMTP 端口号
+        print('login')
+        smtpObj.login(MAIL_USER,MAIL_PASS)  
+        print('send')
+        smtpObj.sendmail(sender, receivers, message.as_string())
+        self.logger.info("邮件发送成功")
+        print('ok')
+        # except Exception as e:
+        #     self.logger.warning(traceback.format_exc())
 
 
     def publish(self):
